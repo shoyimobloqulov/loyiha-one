@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\News;
+use App\Models\Tags;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,7 +23,9 @@ class NewsController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.news.create',compact('categories'));
+
+        $tags = Tags::all();
+        return view('admin.news.create',compact('categories','tags'));
     }
 
     /**
@@ -53,6 +56,11 @@ class NewsController extends Controller
 
         $item->save();
 
+        if ($request->filled('tags')) {
+            $tags = Tags::find($request->input('tags'));
+            $item->tags()->attach($tags);
+        }
+
         // Redirect or return a response as needed
         return redirect()->route('news.index')->with('success', 'Item created successfully!');
     }
@@ -72,7 +80,8 @@ class NewsController extends Controller
     {
         $news = News::find($id);
         $categories = Category::all();
-        return view('admin.news.edit',compact('news','categories'));
+        $tags = Tags::all();
+        return view('admin.news.edit',compact('news','categories','tags'));
     }
 
     /**
@@ -95,6 +104,9 @@ class NewsController extends Controller
         $item->category_id = $request->input('category_id');
         $item->user_id = auth()->user()->id;
 
+
+        $item->save();
+
         // Handle image upload if a new image is provided
         if ($request->hasFile('image')) {
             // Delete the previous image if it exists
@@ -106,8 +118,11 @@ class NewsController extends Controller
             $imagePath = $request->file('image')->store('news-image', 'public');
             $item->image = $imagePath;
         }
+        if ($request->filled('tags')) {
+            $tags = Tags::find($request->input('tags'));
+            $item->tags()->attach($tags);
+        }
 
-        $item->save();
 
         // Redirect or return a response as needed
         return redirect()->route('news.index')->with('success', 'Item updated successfully!');

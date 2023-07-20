@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <!-- Top News Start-->
+    @if(!$firstNewsItem) exit() ; @endif
     <div class="top-news">
         <div class="container-fluid">
             <div class="row">

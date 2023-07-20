@@ -44,7 +44,7 @@
                                 <td>{!! $s->description !!}</td>
                                 <td>{{$s->view_count}}</td>
                                 <td>
-                                    <img src="{{ asset('storage/' . $s->image) }}" alt="" srcset="" width="70px">
+                                    <img src="{{ asset('storage/' . $s->image) }}" alt="Image not found" width="70px">
                                 </td>
                                 <td>
                                     <a class="btn btn-primary" href="{{ route('news.edit',$s->id) }}"><i class="fa fa-edit"></i></a>

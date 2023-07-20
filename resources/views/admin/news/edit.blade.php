@@ -2,12 +2,12 @@
 @section('content')
 <section class="content-header">
     <h1>
-        Katigoriya
+        Yangiliklar
         <small>Taxrirlash</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Katigoriya</a></li>
+        <li><a href="#">Yangiliklar</a></li>
         <li class="active">Taxrirlash</li>
     </ol>
 </section>
@@ -38,7 +38,15 @@
                 </div>
                 <div class="form-group">
                     {!! Form::label('category_id', 'Category') !!}
-                    {!! Form::select('category_id', $categories->pluck('name'), null, ['class' => 'form-control', 'placeholder' => 'Select a category']) !!}
+                    {!! Form::select('category_id', $categories->pluck('name', 'id'), $news->category_id, ['class' => 'form-control', 'placeholder' => 'Select a category']) !!}
+                </div>
+                <div class="form-group">
+                    <label>Tags:</label>
+                    <select name="tags[]" class="form-control select2" multiple="multiple">
+                        @foreach($tags as $tag)
+                            <option value="{{ $tag->id }}" @if(in_array($tag->id, $tag->pluck('id')->toArray())) selected @endif>{{ $tag->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
                     {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
