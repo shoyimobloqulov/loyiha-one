@@ -24,7 +24,7 @@ Route::get('/news/us/',[App\Http\Controllers\Blade\NewsController::class, 'index
 Route::get('/news/full/{id}', [App\Http\Controllers\Blade\NewsController::class, 'show'])->name('news-show');
 Route::get('/news/category/{category_id}', [App\Http\Controllers\Blade\NewsController::class, 'getNewsByCategory'])->name('news.by.category');
 
-Auth::routes(['vertify' => false,'reset'   => false]);
+Auth::routes(['vertify' => false,'reset'   => false,'register' => false]);
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('tags', TagsController::class);
