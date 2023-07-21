@@ -19,6 +19,19 @@
 
         <!-- Template Stylesheet -->
         <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+        <!-- Toastr CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+        <style>
+            .cn-img{
+                width: 100%; /* Set the image width to 100% of the div's width */
+                height: 100%; /* Set the image height to 100% of the div's height */
+                object-fit: cover; /* Preserve the image aspect ratio and cover the whole div */
+                position: absolute; /* Position the image absolutely within the div */
+                top: 0; /* Align the top of the image with the top of the div */
+                left: 0; /* Align the left of the image with the left of the div */
+            }
+        </style>
     </head>
 
     <body>
@@ -34,7 +47,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-4">
-                        
+
                     </div>
                     <div class="col-lg-3 col-md-4">
                         <div class="social">
@@ -95,7 +108,7 @@
                     </div>
                     <div class="col-lg-3 col-md-6"></div>
                     <div class="col-lg-3 col-md-6"></div>
-                    
+
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-widget">
                             <h3 class="title">Newsletter</h3>
@@ -121,12 +134,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 copyright">
-                        <p>Copyright &copy; <a href="https://htmlcodex.com">HTML Codex</a>. All Rights Reserved</p>
+                        <p>Copyright &copy; <?=date('Y')?>
                     </div>
-
-                    <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
                     <div class="col-md-6 template-by">
-                        <p>Template By <a href="https://htmlcodex.com">HTML Codex</a></p>
+
                     </div>
                 </div>
             </div>
@@ -147,5 +158,16 @@
 
         <!-- Template Javascript -->
         <script src="{{ asset('assets/js/main.js') }}"></script>
+
+        <!-- Toastr JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+        <script>
+            @if ($errors->any())
+            @foreach ($errors->all() as $error)
+            toastr.error('{{ $error }}');
+            @endforeach
+            @endif
+        </script>
     </body>
 </html>

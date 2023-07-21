@@ -41,7 +41,11 @@ class NewsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $news = News::find($id);
+        $news->increment('view_count');
+        $tags = $news->tags;
+        $category = Category::all();
+        return view('full-news',compact('news','tags','category'));
     }
 
     /**
@@ -66,5 +70,15 @@ class NewsController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function getNewsByCategory(string $category_id)
+    {
+        $news = News::where('category_id',$category_id)
+            ->paginate(12);
+
+        $category = Category::all();
+
+        return view('full-list',compact('news','category'));
     }
 }

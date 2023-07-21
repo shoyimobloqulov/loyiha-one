@@ -17,8 +17,8 @@
                                         <img src="{{ asset('storage/news-image/../' . $n->image) }}"/>
                                         <div class="cn-content">
                                             <div class="cn-content-inner">
-                                                <a class="cn-date" href=""><i class="far fa-clock"></i>{{ $n->created_at->format('d-M-Y') }}</a>
-                                                <a class="cn-title" href="">{{ $n->title }}</a>
+                                                <a class="cn-date" href="{{ route('news-show',$n->id)  }}"><i class="far fa-clock"></i>{{ $n->created_at->format('d-M-Y') }}</a>
+                                                <a class="cn-title" href="{{ route('news-show',$n->id)  }}">{{ $n->title }}</a>
                                             </div>
                                         </div>
                                     </div>

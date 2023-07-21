@@ -10,8 +10,8 @@
                         <img src="{{ asset('storage/news-image/../' . $firstNewsItem->image) }}" style="max-width:fit-content;"/>
                         <div class="tn-content">
                             <div class="tn-content-inner">
-                                <a class="tn-date" href=""><i class="far fa-clock"></i>{{ $firstNewsItem->created_at->format('d-M-Y') }}</a>
-                                <a class="tn-title" href="">{{ $firstNewsItem->title }}</a>
+                                <a class="tn-date" href="{{ route('news-show',$firstNewsItem->id)  }}"><i class="far fa-clock"></i>{{ $firstNewsItem->created_at->format('d-M-Y') }}</a>
+                                <a class="tn-title" href="{{ route('news-show',$firstNewsItem->id)  }}">{{ $firstNewsItem->title }}</a>
                             </div>
                         </div>
                     </div>
@@ -24,8 +24,8 @@
                                 <img src="{{ asset('storage/news-image/../' . $newsItem->image) }}" />
                                 <div class="tn-content">
                                     <div class="tn-content-inner">
-                                        <a class="tn-date" href=""><i class="far fa-clock"></i>{{ $newsItem->created_at->format('d-M-Y') }}</a>
-                                        <a class="tn-title" href="">{{ $newsItem->title }}</a>
+                                        <a class="tn-date" href="{{ route('news-show',$newsItem->id)  }}"><i class="far fa-clock"></i>{{ $newsItem->created_at->format('d-M-Y') }}</a>
+                                        <a class="tn-title" href="{{ route('news-show',$newsItem->id)  }}>{{ $newsItem->title }}</a>
                                     </div>
                                 </div>
                             </div>

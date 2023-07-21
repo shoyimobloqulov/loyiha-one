@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\News;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\TagsController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -20,6 +21,8 @@ Route::post('/contact/send', [App\Http\Controllers\Blade\ContactController::clas
 
 Route::get('/about/us/',[App\Http\Controllers\Blade\AboutController::class, 'index'])->name('about');
 Route::get('/news/us/',[App\Http\Controllers\Blade\NewsController::class, 'index'])->name('news');
+Route::get('/news/full/{id}', [App\Http\Controllers\Blade\NewsController::class, 'show'])->name('news-show');
+Route::get('/news/category/{category_id}', [App\Http\Controllers\Blade\NewsController::class, 'getNewsByCategory'])->name('news.by.category');
 
 Auth::routes(['vertify' => false,'reset'   => false]);
 
@@ -30,5 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('about', AboutController::class);
     Route::resource('news', NewsController::class);
 });
+
+Route::get('/news/full-list/{id}',[\App\Http\Controllers\Blade\NewsController::class,'FullList']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
